@@ -15,7 +15,7 @@ class Solution:
         if smallest <= 1:
             return False 
         
-        # Find the factors of the smallest count
+        # Find the factors of the smallest count.
         factors = set()
         for i in range(2, int(smallest ** 0.5) + 1):
             if smallest % i == 0:
