@@ -10,14 +10,14 @@ class Solution:
         required_count = len(t)
         min_window_len, min_window_start = float('inf'), 0
 
-        # Loop through s using both the left and right pointers
+        # Loop through s using the right pointer
         while right < len(s):
             # If the current character is required for t, decrement the required count
             if count_t[ord(s[right])] > 0:
                 required_count -= 1
             count_t[ord(s[right])] -= 1
 
-            # If the current window contains all the characters in t, move the left pointer to the right and update the minimum window
+            # While the current window contains all the characters in t, move the left pointer to the right
             while required_count == 0:
                 # Update the minimum window if the current window is smaller
                 if right - left + 1 < min_window_len:
@@ -35,12 +35,11 @@ class Solution:
             # Move the right pointer to the right
             right += 1
 
-        # Create the minimum window using a list
-        if min_window_len != float('inf'):
-            min_window = [s[i] for i in range(min_window_start, min_window_start + min_window_len)]
-            return ''.join(min_window)
-        else:
-            return ''
+        # Create the minimum window using a list comprehension
+        min_window = [s[i] for i in range(min_window_start, min_window_start + min_window_len)] if min_window_len != float('inf') else []
+
+        return ''.join(min_window)
+
 
 
 
