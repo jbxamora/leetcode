@@ -1,31 +1,33 @@
 class Solution:
     def isPerfectSquare(self, num: int) -> bool:
-        # Base case: num is 1, which is a perfect square
-        if num < 2:
-            return True
-        
         # Initialize the search range
-        left, right = 2, num // 2
+        l, r = 1, num
         
         # Binary search
-        while left <= right:
-            # Compute the middle element using integer division
-            mid = (left + right) // 2
+        while l + 1 < r:
+            # Compute the middle element
+            m = (l + r) // 2
             
             # Compute the square of the middle element
-            square = mid * mid
+            sq = m * m
             
             # If the square matches the input, return True
-            if square == num:
+            if sq == num:
                 return True
             
             # If the square is greater than the input, search the left half
-            elif square > num:
-                right = mid - 1
+            elif sq > num:
+                r = m
             
             # If the square is less than the input, search the right half
             else:
-                left = mid + 1
+                l = m
         
-        # If the loop terminates without finding a perfect square, return False
+        # Check if the left or right endpoint is a perfect square
+        if l * l == num:
+            return True
+        if r * r == num:
+            return True
+        
+        # If no perfect square is found, return False
         return False
