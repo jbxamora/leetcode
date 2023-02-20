@@ -5,10 +5,10 @@ class Solution:
         for char in t:
             count_t[ord(char)] += 1
 
-        # Initialize the left and right pointers, the required count, and the min window and its length
+        # Initialize the left and right pointers, the required count, and the minimum window length and starting index
         left, right = 0, 0
         required_count = len(t)
-        min_window, min_window_len = '', float('inf')
+        min_window_len, min_window_start = float('inf'), 0
 
         # Loop through s using the right pointer
         while right < len(s):
@@ -19,10 +19,10 @@ class Solution:
 
             # While the current window contains all the characters in t, move the left pointer to the right
             while required_count == 0:
-                # Update the min window if the current window is smaller
+                # Update the minimum window if the current window is smaller
                 if right - left + 1 < min_window_len:
-                    min_window = s[left:right+1]
                     min_window_len = right - left + 1
+                    min_window_start = left
 
                 # If the character at the left pointer is required for t, increment the required count
                 count_t[ord(s[left])] += 1
@@ -35,5 +35,6 @@ class Solution:
             # Move the right pointer to the right
             right += 1
 
-        return min_window
+        return s[min_window_start:min_window_start+min_window_len] if min_window_len != float('inf') else ''
+
 
