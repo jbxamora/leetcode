@@ -28,6 +28,6 @@ class Solution:
             if all(x % f == 0 for x in values):
                 return True
         
-        # If the deck cannot be divided into groups of any size, return False
+        # If the deck cannot be divided into groups of any size, return False.
         return False
 
