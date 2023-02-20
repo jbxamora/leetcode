@@ -35,8 +35,8 @@ class Solution:
             # Move the right pointer to the right
             right += 1
 
-        # Create the minimum window using slicing
-        min_window = s[min_window_start:min_window_start + min_window_len] if min_window_len != float('inf') else ''
+        # Create the minimum window using string concatenation
+        min_window = "" if min_window_len == float('inf') else s[min_window_start:min_window_start + min_window_len]
 
         return min_window
 
