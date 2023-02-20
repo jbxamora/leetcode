@@ -1,30 +1,26 @@
 class Solution:
-    def hasGroupsSizeX(self, deck):
-        # Create a dictionary that stores the count of each unique card
-        d = {}
-        for x in deck:
-            d[x] = d.get(x, 0) + 1
+    def hasGroupsSizeX(self, deck: List[int]) -> bool:
+        # Use the Counter class to count the number of occurrences of each card in the deck
+        ht = Counter(deck)
         
-        # Compute the set of all card counts
-        res = set(d.values())
+        # Compute the set of all counts
+        counts_lst = set(ht.values())
         
-        # If there is a group with only one card, it is impossible to divide the cards into groups of X
-        if 1 in res:
-            return False
+        # Find the minimum count
+        min_counts = min(counts_lst)
+
+        # Check if the deck can be divided into groups of size i for i = 2, 3, ..., min_counts
+        for i in range(2, min_counts+1):
+            status = True
+            for num in counts_lst:
+                if num % i != 0:
+                    # If any count is not divisible by i, it is impossible to divide the deck into groups of size i
+                    status = False
+                    break
+            if status:
+                # If all counts are divisible by i, the deck can be divided into groups of size i
+                return True
         
-        # If all groups have the same number of cards, it is possible to divide the cards into groups of X
-        if len(res) == 1:
-            return True
-        
-        # Use the Euclidean algorithm to compute the greatest common divisor of the card counts
-        div = res.pop()
-        for x in res:
-            while x:
-                div, x = x, div % x
-        
-            # If the GCD is 1, it is impossible to divide the cards into groups of X
-            if div == 1:
-                return False
-        
-        # If the GCD is not 1, it is possible to divide the cards into groups of X
-        return div != 1
+        # If the deck cannot be divided into groups of any size, return False
+        return False
+
