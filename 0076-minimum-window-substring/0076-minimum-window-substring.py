@@ -35,11 +35,10 @@ class Solution:
             # Move the right pointer to the right
             right += 1
 
-        # Create the minimum window using a list comprehension
-        min_window = [s[i] for i in range(min_window_start, min_window_start + min_window_len)] if min_window_len != float('inf') else []
+        # Create the minimum window using slicing
+        min_window = s[min_window_start:min_window_start + min_window_len] if min_window_len != float('inf') else ''
 
-        return ''.join(min_window)
-
+        return min_window
 
 
 
