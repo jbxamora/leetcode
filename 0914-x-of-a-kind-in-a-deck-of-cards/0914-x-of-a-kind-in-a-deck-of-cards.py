@@ -25,7 +25,7 @@ class Solution:
                 if all(x % i == 0 for x in values[1:]):
                     return True
         
-        # Check if the deck can be divided into groups of size smallest
+        # Check if the deck can be divided into groups of size smallest.
         if all(x % smallest == 0 for x in values[1:]):
             return True
         
