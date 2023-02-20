@@ -1,16 +1,7 @@
 class Solution:
     def maximumWealth(self, accounts: List[List[int]]) -> int:
-        # Initialize the maximum wealth to be zero
-        max_wealth = 0
+        # Use a list comprehension to calculate the sum of each account
+        account_sums = [sum(account) for account in accounts]
         
-        # Loop over the rows in the accounts matrix
-        for row in accounts:
-            # Calculate the sum of the elements in the row
-            row_sum = sum(row)
-            
-            # Update the maximum wealth if necessary
-            if row_sum > max_wealth:
-                max_wealth = row_sum
-        
-        # Return the maximum wealth
-        return max_wealth
+        # Return the maximum sum of the accounts
+        return max(account_sums)
