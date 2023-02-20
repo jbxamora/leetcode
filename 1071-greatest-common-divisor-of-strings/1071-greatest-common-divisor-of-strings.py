@@ -19,3 +19,6 @@ class Solution(object):
         
         # Return the greatest common divisor
         return str1[:len1]
+
+#     Runtime: 7 ms, faster than 99.91% of Python online submissions for Greatest Common Divisor of Strings.
+# Memory Usage: 13.4 MB, less than 76.78% of Python online submissions for Greatest Common Divisor of Strings.
