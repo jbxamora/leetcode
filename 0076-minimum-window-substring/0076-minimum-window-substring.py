@@ -1,14 +1,14 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        # Initialize the count array for characters in t
-        count_t = [0] * 128
-        for char in t:
-            count_t[ord(char)] += 1
-
         # Initialize the left and right pointers, the required count, and the minimum window length and starting index
         left, right = 0, 0
         required_count = len(t)
         min_window_len, min_window_start = float('inf'), 0
+
+        # Initialize the count array for characters in t
+        count_t = [0] * 128
+        for char in t:
+            count_t[ord(char)] += 1
 
         # Loop through s using the right pointer
         while right < len(s):
@@ -35,6 +35,11 @@ class Solution:
             # Move the right pointer to the right
             right += 1
 
-        return s[min_window_start:min_window_start+min_window_len] if min_window_len != float('inf') else ''
+        # Create the minimum window using a list
+        if min_window_len != float('inf') and min_window_start + min_window_len <= len(s):
+            min_window = [s[i] for i in range(min_window_start, min_window_start + min_window_len)]
+            return ''.join(min_window)
+        else:
+            return ''
 
 
