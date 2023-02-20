@@ -1,25 +1,33 @@
 class Solution:
     def hasGroupsSizeX(self, deck: List[int]) -> bool:
-        # Use the Counter class to count the number of occurrences of each card in the deck
-        ht = Counter(deck)
+        # Create a frequency dictionary to store the count of each unique card
+        freq = {}
+        for x in deck:
+            if x in freq:
+                freq[x] += 1
+            else:
+                freq[x] = 1 
         
-        # Compute the set of all counts
-        counts_lst = set(ht.values())
+        # Get a list of the card counts, sorted in ascending order
+        values = sorted(freq.values())
         
-        # Find the minimum count
-        min_counts = min(counts_lst)
+        # Check if the smallest count is less than or equal to 1
+        smallest = values[0]
+        if smallest <= 1:
+            return False 
+        
+        # Use the square root of the smallest count as an upper bound for the possible values of X
+        m = math.ceil(smallest**(1/2))
 
-        # Check if the deck can be divided into groups of size i for i = 2, 3, ..., min_counts
-        for i in range(2, min_counts+1):
-            status = True
-            for num in counts_lst:
-                if num % i != 0:
-                    # If any count is not divisible by i, it is impossible to divide the deck into groups of size i
-                    status = False
-                    break
-            if status:
-                # If all counts are divisible by i, the deck can be divided into groups of size i
-                return True
+        # Check if the deck can be divided into groups of size X for X = 2, 3, ..., m+1
+        for i in range(2, m+2):
+            if smallest % i == 0:
+                if all(x % i == 0 for x in values[1:]):
+                    return True
+        
+        # Check if the deck can be divided into groups of size smallest
+        if all(x % smallest == 0 for x in values[1:]):
+            return True
         
         # If the deck cannot be divided into groups of any size, return False
         return False
