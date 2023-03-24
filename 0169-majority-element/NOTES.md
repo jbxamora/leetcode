@@ -1,0 +1,3 @@
+The `majorityElement` function takes in a list of integers (`nums`) and returns the majority element, which is defined as the element that appears more than `n/2` times, where n is the length of the list.
+​
+The function first creates a dictionary (`count_dict`) to store the count of each element in the list. It then iterates through the list and increments the count for each element in the dictionary. Finally, it uses the `max` function with the `key` argument set to `count_dict.get` to find the element with the highest count in the dictionary, which is the majority element.
