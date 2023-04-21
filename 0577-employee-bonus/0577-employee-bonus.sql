@@ -1,14 +1,3 @@
-# Write your MySQL query statement below
-SELECT
-  e.name,
-  b.bonus
-FROM
-  Employee e
-LEFT JOIN
-  Bonus b
-ON
-  e.empId = b.empId
-WHERE
-  (b.bonus < 1000 OR b.bonus IS NULL)
-ORDER BY
-  e.name;
+select name,bonus from employee
+left join bonus using (empId)
+where coalesce(bonus,0)<1000
